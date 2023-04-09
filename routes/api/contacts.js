@@ -9,12 +9,21 @@ const { HttpError } = require('../../helpers');
 const router = express.Router();
 
 const addSchema = Joi.object({
-  // name: Joi.string().required(),
-  // email: Joi.string().required(),
-  // phone: Joi.string().required(),
-  name: Joi.string(),
-  email: Joi.string(),
-  phone: Joi.string(),
+  name: Joi.string()
+    .pattern(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/)
+    .required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string()
+    .pattern(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/)
+    .required(),
+});
+
+const updateSchema = Joi.object({
+  name: Joi.string().pattern(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/),
+  email: Joi.string().email(),
+  phone: Joi.string().pattern(
+    /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/
+  ),
 });
 
 router.get('/', async (req, res, next) => {
@@ -69,7 +78,7 @@ router.delete('/:contactId', async (req, res, next) => {
 
 router.put('/:contactId', async (req, res, next) => {
   try {
-    const { error } = addSchema.validate(req.body);
+    const { error } = updateSchema.validate(req.body);
     if (error) {
       throw HttpError(400, error.message);
     }
