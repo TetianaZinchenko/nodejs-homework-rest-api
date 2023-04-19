@@ -47,6 +47,11 @@ const contactSchema = new Schema(
       enum: statusOptions,
       default: false,
     },
+    owner: {
+      // new
+      type: Schema.Types.ObjectId, // new
+      ref: 'user', // new
+    }, // new
   },
   { versionKey: false, timestamps: true }
 );
