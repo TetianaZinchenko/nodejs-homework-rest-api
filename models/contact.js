@@ -48,10 +48,10 @@ const contactSchema = new Schema(
       default: false,
     },
     owner: {
-      // new
-      type: Schema.Types.ObjectId, // new
-      ref: 'user', // new
-    }, // new
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      require: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
