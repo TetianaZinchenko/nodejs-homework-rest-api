@@ -13,16 +13,6 @@ const getAll = async (req, res) => {
   res.json(result);
 };
 
-// const getById = async (req, res) => {
-//   const { _id: owner } = req.user;
-//   const { contactId } = req.params;
-//   const result = await Contact.findById(contactId, owner);
-//   if (!result) {
-//     throw HttpError(404, 'Not found');
-//   }
-//   res.json(result);
-// };
-
 const getById = async (req, res) => {
   const { _id: owner } = req.user;
   const { contactId } = req.params;
@@ -39,16 +29,6 @@ const add = async (req, res) => {
   res.status(201).json(result);
 };
 
-// const updateById = async (req, res) => {
-//   const { _id: owner } = req.user;
-//   const { contactId } = req.params;
-//   const result = await Contact.findByIdAndUpdate({ contactId, owner }, req.body, { new: true });
-//   if (!result) {
-//     throw HttpError(404, 'Not found');
-//   }
-//   res.status(200).json(result);
-// };
-
 const updateById = async (req, res) => {
   const { _id: owner } = req.user;
   const { contactId } = req.params;
@@ -60,20 +40,6 @@ const updateById = async (req, res) => {
   }
   res.status(200).json(result);
 };
-
-// const updateStatusContact = async (req, res) => {
-//   const { _id: owner } = req.user;
-//   const { favorite } = req.body;
-//   const { contactId } = req.params;
-//   if (favorite === undefined) {
-//     throw HttpError(400, 'Missing field favorite');
-//   }
-//   const result = await Contact.findByIdAndUpdate({ contactId, owner }, { favorite }, { new: true });
-//   if (!result) {
-//     throw HttpError(404, 'Not found');
-//   }
-//   res.status(200).json(result);
-// };
 
 const updateStatusContact = async (req, res) => {
   const { _id: owner } = req.user;
@@ -88,18 +54,6 @@ const updateStatusContact = async (req, res) => {
   }
   res.status(200).json(result);
 };
-
-// const deleteById = async (req, res) => {
-//   const { _id: owner } = req.user;
-//   const { contactId } = req.params;
-//   const result = await Contact.findByIdAndRemove(contactId, owner);
-//   if (!result) {
-//     throw HttpError(404, 'Not found');
-//   }
-//   res.json({
-//     message: 'Delete success',
-//   });
-// };
 
 const deleteById = async (req, res) => {
   const { _id: owner } = req.user;
