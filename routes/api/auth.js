@@ -8,10 +8,12 @@ const { validateBody, authenticate, upload } = require('../../middlewares');
 
 const { schemas } = require('../../models/user');
 
-// signup
 router.post('/register', validateBody(schemas.registerSchema), ctrl.register);
 
-// signin
+router.get('/verify/:verificationToken', ctrl.verifyEmail);
+
+router.post('/verify', validateBody(schemas.emailSchema), ctrl.resendVerifyEmail);
+
 router.post('/login', validateBody(schemas.loginSchema), ctrl.login);
 
 router.get('/current', authenticate, ctrl.getCurrent);
